@@ -1,10 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+
 import 'package:merokinmel_planner/pages/create_event.dart';
-import 'package:merokinmel_planner/pages/create_shopping.dart';
+import 'package:merokinmel_planner/pages/create_meroshopping.dart';
+
 import 'package:merokinmel_planner/pages/create_user.dart';
 import 'package:merokinmel_planner/pages/customize.dart';
+import 'package:merokinmel_planner/pages/purchase_items.dart';
 import 'package:merokinmel_planner/provider/theme_block.dart';
 import 'package:provider/provider.dart';
 
@@ -46,11 +49,15 @@ class _MyDrawerState extends State<MyDrawer> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => CreateShoppingList()));
+                      builder: (context) => CreateMeroShoppingList()));
             },
-            leading: Icon(Icons.shopping_cart),
+            leading: Icon(Icons.note),
             title: Text('Create Shopping List')),
-        ListTile(leading: Icon(Icons.add_box), title: Text('Add Item')),
+        ListTile(
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>PurchaseItems()));
+          },
+          leading: Icon(Icons.shopping_cart), title: Text('Update Shopping Items')),
         ListTile(
             onTap: () {
               Navigator.push(context,

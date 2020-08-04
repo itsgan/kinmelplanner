@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:merokinmel_planner/pages/add_items.dart';
 import 'package:merokinmel_planner/provider/theme_block.dart';
 import 'package:provider/provider.dart';
 import 'package:toast/toast.dart';
@@ -29,7 +30,7 @@ class _CustomSettingState extends State<CustomSetting> {
     firestore
         .collection('categories')
         .document(categoryName)
-        .setData({'category': category.text});
+        .setData({'categoryName': category.text});
   }
 
   addLocation(String locationName) {
@@ -46,7 +47,7 @@ class _CustomSettingState extends State<CustomSetting> {
         appBar: AppBar(title: Text('Customize')),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
-          child: Column(
+          child: ListView(
             children: <Widget>[
               Form(
                 key: key1,
@@ -145,7 +146,12 @@ class _CustomSettingState extends State<CustomSetting> {
                             }))
                   ],
                 ),
+                
               ),
+              SizedBox(height:10),
+              RaisedButton(child:Text('Add Multiple Items'),onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>AddItemsList()));
+              }),
               ListTile(
                 title: Text('Enable Dark Theme'),
                 trailing: Switch(

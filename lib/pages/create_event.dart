@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:toast/toast.dart';
 import 'package:merokinmel_planner/provider/events_block.dart';
 import 'package:provider/provider.dart';
-import 'package:toast/toast.dart';
 
 class CreateEvent extends StatefulWidget {
   @override
@@ -30,7 +30,7 @@ class _CreateEventState extends State<CreateEvent> {
 
   @override
   Widget build(BuildContext context) {
-    // final EventBlock eventBlock = Provider.of<EventBlock>(context);
+    final EventBlock eventBlock = Provider.of<EventBlock>(context);
 
     return Scaffold(
       appBar: AppBar(title: Text('Create Event')),
@@ -42,42 +42,59 @@ class _CreateEventState extends State<CreateEvent> {
               child: Column(
                 children: <Widget>[
                   TextFormField(
-                    decoration: InputDecoration(labelText: 'Event'),
+                    decoration: InputDecoration(
+                        labelText: 'Event', border: OutlineInputBorder()),
                     controller: event,
                     validator: (value) =>
                         value.isEmpty ? 'This field cannot be empty' : null,
                   ),
                   Row(
                     children: <Widget>[
-                      Text(meroEventDate == null
-                          ? 'Select the date'
-                          : meroEventDate.toString().split(' ').first),
-                      RaisedButton(
-                          child: Text('...'),
-                          onPressed: () {
-                            showDatePicker(
-                              context: context,
-                              initialDate: (meroEventDate == null
-                                  ? DateTime.now()
-                                  : meroEventDate),
-                              firstDate: DateTime(2020),
-                              lastDate: DateTime(2050),
-                            ).then((value) {
-                              setState(() {
-                                meroEventDate = value;
+                      Container(
+                        padding: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.blue),
+                            borderRadius: BorderRadius.circular(5)),
+                        child: Text(meroEventDate == null
+                            ? 'Select the date'
+                            : meroEventDate.toString().split(' ').first),
+                      ),
+                      SizedBox(width: 5),
+                      SizedBox(
+                        width: 75,
+                        child: RaisedButton.icon(
+                            icon: Icon(Icons.calendar_today),
+                            label: Text('...'),
+                            onPressed: () {
+                              showDatePicker(
+                                context: context,
+                                initialDate: (meroEventDate == null
+                                    ? DateTime.now()
+                                    : meroEventDate),
+                                firstDate: DateTime(2020),
+                                lastDate: DateTime(2050),
+                              ).then((value) {
+                                setState(() {
+                                  meroEventDate = value;
+                                });
                               });
-                            });
-                          })
+                            }),
+                      )
                     ],
                   ),
                   TextFormField(
-                    decoration: InputDecoration(labelText: 'Venue'),
+                    decoration: InputDecoration(
+                        labelText: 'Venue', border: OutlineInputBorder()),
                     validator: (value) =>
                         value.isEmpty ? 'This field cannot be empty' : null,
                     controller: venue,
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   TextFormField(
-                    decoration: InputDecoration(labelText: 'Members'),
+                    decoration: InputDecoration(
+                        labelText: 'Members', border: OutlineInputBorder()),
                     controller: members,
                     validator: (value) =>
                         value.isEmpty ? 'This field cannot be empty' : null,
@@ -93,7 +110,7 @@ class _CreateEventState extends State<CreateEvent> {
                               duration: Toast.LENGTH_LONG,
                               gravity: Toast.CENTER);
 
-                          // eventBlock.createEvent(event.text);
+                          eventBlock.createEvent(event.text);
 
                           setState(() {
                             venue.clear();

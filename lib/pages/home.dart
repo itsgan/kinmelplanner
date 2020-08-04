@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:merokinmel_planner/pages/call.dart';
+
+import 'package:merokinmel_planner/pages/create_meroshopping.dart';
 import 'package:merokinmel_planner/pages/drop_down.dart';
 import 'package:merokinmel_planner/pages/events.dart';
+import 'package:merokinmel_planner/pages/math.dart';
 import 'package:merokinmel_planner/pages/members.dart';
 import 'package:merokinmel_planner/pages/provider.dart';
 import 'package:merokinmel_planner/pages/shoppinglist.dart';
+import 'package:merokinmel_planner/pages/tips_calculator.dart';
 import 'package:merokinmel_planner/widgets/mydrawer.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,15 +30,13 @@ class _HomePageState extends State<HomePage> {
                   child: Image.asset('images/SabjiMandi.jpg')),
             ),
             Wrap(
-              runAlignment: WrapAlignment.center,
+              alignment: WrapAlignment.center,
               spacing: 5,
               children: <Widget>[
                 RaisedButton(
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => EventsList()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => MyEvents()));
                     },
                     child: Text('Events')),
                 RaisedButton(
@@ -48,10 +49,12 @@ class _HomePageState extends State<HomePage> {
                     child: Text('Shopping List')),
                 RaisedButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Makecall()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MathCalculation()));
                     },
-                    child: Text('Call Now')),
+                    child: Text('Math Demo')),
                 RaisedButton(
                     onPressed: () {
                       Navigator.push(
@@ -74,6 +77,22 @@ class _HomePageState extends State<HomePage> {
                               builder: (context) => MeroProvider()));
                     },
                     child: Text('Provider')),
+                RaisedButton(
+                    child: Text('Create Shop List'),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CreateMeroShoppingList()));
+                    }),
+                RaisedButton(
+                    child: Text('Bill Sharing'),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TipsCalculator()));
+                    })
               ],
             )
           ],
