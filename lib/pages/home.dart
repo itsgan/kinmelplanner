@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:merokinmel_planner/pages/create_meroshopping.dart';
 import 'package:merokinmel_planner/pages/drop_down.dart';
 import 'package:merokinmel_planner/pages/events.dart';
+import 'package:merokinmel_planner/pages/login.dart';
 import 'package:merokinmel_planner/pages/math.dart';
 import 'package:merokinmel_planner/pages/members.dart';
 import 'package:merokinmel_planner/pages/provider.dart';
@@ -92,6 +93,14 @@ class _HomePageState extends State<HomePage> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => TipsCalculator()));
+                    }),
+                    RaisedButton(
+                    child: Text('Log In'),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => UserLogIn()));
                     })
               ],
             )

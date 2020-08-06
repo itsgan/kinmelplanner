@@ -8,6 +8,7 @@ import 'package:merokinmel_planner/pages/create_meroshopping.dart';
 import 'package:merokinmel_planner/pages/create_user.dart';
 import 'package:merokinmel_planner/pages/customize.dart';
 import 'package:merokinmel_planner/pages/purchase_items.dart';
+import 'package:merokinmel_planner/provider/events_block.dart';
 import 'package:merokinmel_planner/provider/theme_block.dart';
 import 'package:provider/provider.dart';
 
@@ -19,15 +20,16 @@ class MyDrawer extends StatefulWidget {
 class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
+    final EventBlock eventBlock = Provider.of<EventBlock>(context);
     final ThemeBlock themeBlock = Provider.of<ThemeBlock>(context);
     return Drawer(
         child: ListView(
       children: <Widget>[
         UserAccountsDrawerHeader(
-          accountName: Text('Gagan Nepali'),
-          accountEmail: Text('capitalgagan@gmail.com'),
+          accountName: Text(eventBlock.accountName),
+          accountEmail: Text(eventBlock.email),
           currentAccountPicture: CircleAvatar(
-            backgroundImage: AssetImage('images/user.jpg'),
+            backgroundImage: NetworkImage(eventBlock.image),
           ),
         ),
         ListTile(
